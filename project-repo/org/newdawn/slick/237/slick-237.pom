@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.newdawn</groupId>
+  <artifactId>slick</artifactId>
+  <version>237</version>
+  <description>POM was created from install:install-file</description>
+  <repositories>
+    <repository>
+      <id>project-repo</id>
+      <name>In Project Repository</name>
+      <url>file://${basedir}/project-repo</url>
+    </repository>
+  </repositories>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.lwjgl.lwjgl</groupId>
+  		<artifactId>lwjgl</artifactId>
+  		<version>2.9.3</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.testng</groupId>
+  		<artifactId>testng</artifactId>
+  		<version>6.8.8</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.jcraft</groupId>
+  		<artifactId>jorbis</artifactId>
+  		<version>0.0.17</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>ibxm</groupId>
+  		<artifactId>ibxm</artifactId>
+  		<version>a68</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>javax.jnlp</groupId>
+  		<artifactId>jnlp-api</artifactId>
+  		<version>5.0</version>
+  		<scope>system</scope>
+  		<systemPath>${java.home}/lib/javaws.jar</systemPath>
+  	</dependency>
+  </dependencies>
+</project>
