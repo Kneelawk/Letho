@@ -1,4 +1,4 @@
-package com.brynwyl.lethos.ref;
+package com.brynwyl.letho.ref;
 
 import java.io.File;
 

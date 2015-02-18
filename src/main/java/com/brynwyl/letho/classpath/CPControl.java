@@ -1,4 +1,4 @@
-package com.brynwyl.lethos.classpath;
+package com.brynwyl.letho.classpath;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.brynwyl.lethos.ref.LocationRef;
+import com.brynwyl.letho.ref.LocationRef;
 
 public class CPControl {
 	public static Logger log;
