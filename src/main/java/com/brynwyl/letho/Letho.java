@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.brynwyl.letho.classpath.CPControl;
 import com.brynwyl.letho.opengl.GLControl;
 
-public class Lethos {
+public class Letho {
 	public static Logger log;
 
 	public static void main(String[] args) {
@@ -18,5 +18,16 @@ public class Lethos {
 
 		// load opengl
 		GLControl.init();
+		
+		// start gl loop
+		GLControl.startGLLoop();
+	}
+	
+	public static void glLoop() {
+		
+	}
+	
+	public static void shutdown() {
+		
 	}
 }
