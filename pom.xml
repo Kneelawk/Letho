@@ -4,7 +4,7 @@
 	<groupId>com.brynwyl.letho</groupId>
 	<artifactId>letho</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Lethos</name>
+	<name>Letho</name>
 	<description>A 2D Side Scroller Game</description>
 	
 	<properties>
