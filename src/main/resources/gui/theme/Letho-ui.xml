@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
+<themes>
+    <fontDef name="normal" filename="mc.fnt" color="#772700">
+        <fontParam if="error" color="#6904FF"/>
+        <fontParam if="warning" color="#EEC400"/>
+        <fontParam if="disabled" color="#6C5448"/>
+        <fontParam if="textSelection" color="#290000"/>
+    </fontDef>
+    <images file="gui.png">
+        <area name="button.bg.normal.normal" xywh="0,0,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.bg.normal.hover" xywh="28,0,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.bg.normal.press" xywh="56,0,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.bg.selected.normal" xywh="0,28,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.bg.selected.hover" xywh="28,28,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.bg.selected.press" xywh="56,28,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.bg.normal.disabled" xywh="0,56,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.bg.selected.disabled" xywh="0,84,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button.fg.keyboardfocus" xywh="84,0,28,28" splitx="L6,R6" splity="T6,B6" unless="disabled"/>
+        <area name="emptyb.bg.normal.normal" xywh="0,112,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="emptyb.bg.normal.hover" xywh="28,112,28,28" splitx="L6,R6" splity="T6,B6"/>
+    
+        <area name="emptyb.bg.normal.press" xywh="56,112,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="emptyb.bg.disabled" xywh="0,140,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="checkmark.normal" xywh="84,112,28,28"/>
+        <area name="checkmark.disabled" xywh="112,112,28,28"/>
+    
+        <area name="radiobuttondot.normal" xywh="84,140,28,28"/>
+        <area name="radiobuttondot.disabled" xywh="112,140,28,28"/>
+        <area name="text.pointer.on" xywh="511,0,1,28"/>
+        <area name="text.pointer.off" xywh="510,0,1,28"/>
+    
+    
+    
+    
+        <select name="button.bg">
+            <select if="disabled">
+                <alias ref="button.bg.selected.disabled" if="selected"/>
+                <alias ref="button.bg.normal.disabled"/>
+            </select>
+            <select if="selected">
+                <alias ref="button.bg.selected.hover" if="hover"/>
+                <alias ref="button.bg.selected.press" if="pressed | armed"/>
+                <alias ref="button.bg.selected.normal"/>
+            </select>
+            <select>
+                <alias ref="button.bg.normal.hover" if="hover"/>
+                <alias ref="button.bg.normal.press" if="pressed | armed"/>
+                <alias ref="button.bg.normal.normal"/>
+            </select>
+        
+        </select>
+        <composed name="button">
+            <alias ref="button.bg"/>
+            <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
+        
+        </composed>
+    
+    
+    
+    
+        <select name="emptyb.bg">
+            <alias ref="emptyb.bg.disabled" if="disabled"/>
+            <select>
+                <alias ref="emptyb.bg.normal.hover" if="hover"/>
+                <alias ref="emptyb.bg.normal.press" if="pressed | armed"/>
+            
+                <alias ref="emptyb.bg.normal.normal"/>
+            </select>
+        </select>
+        <select name="checkmark">
+            <alias ref="checkmark.disabled" if="disabled"/>
+            <alias ref="checkmark.normal"/>
+        </select>
+        <grid name="checkbox" weightsX="0,1" weightsY="1">
+            <composed>
+                <alias ref="emptyb.bg"/>
+                <alias ref="checkmark" if="selected"/>
+                <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
+            </composed>
+        </grid>
+    
+    
+        <select name="radiobuttondot">
+            <alias ref="radiobuttondot.disabled" if="disabled"/>
+        
+            <alias ref="radiobuttondot.normal"/>
+        </select>
+        <grid name="radiobutton" weightsX="0,1" weightsY="1">
+            <composed>
+                <alias ref="emptyb.bg"/>
+                <alias ref="radiobuttondot" if="selected"/>
+                <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
+            </composed>
+        </grid>
+        <animation name="text.pointer" timeSource="hover">
+            <repeat>
+                <frame duration="500" ref="text.pointer.on"/>
+                <frame duration="500" ref="text.pointer.off"/>
+            
+            </repeat>
+        </animation>
+    
+    
+    
+    
+    </images>
+
+
+    <inputMapDef name="-defaultInputMap">
+        <action name="selectAll">ctrl A</action>
+        <action name="selectAll">cmd A</action>
+        <action name="cut">ctrl X</action>
+        <action name="cut">cmd X</action>
+        <action name="copy">ctrl C</action>
+        <action name="copy">cmd C</action>
+        <action name="paste">ctrl V</action>
+        <action name="paste">cmd V</action>
+    </inputMapDef>
+
+    <theme name="-defaults">
+        <param name="background"><image>none</image></param>
+        <param name="overlay"><image>none</image></param>
+        <param name="font"><font>normal</font></param>
+        <param name="textAlignment"><enum type="alignment">left</enum></param>
+        <param name="minWidth"><int>0</int></param>
+        <param name="minHeight"><int>0</int></param>
+        <param name="maxWidth"><int>0</int></param>
+        <param name="maxHeight"><int>0</int></param>
+        <param name="inputMap"><inputMap>-defaultInputMap</inputMap></param>
+    </theme>
+
+    <theme name="label" ref="-defaults" allowWildcard="true">
+        <param name="border"><border>5</border></param>
+    </theme>
+    <theme name="button" ref="-defaults">
+        <param name="background"><image>button</image></param>
+        <param name="border"><border>5</border></param>
+        <param name="minWidth"><int>200</int></param>
+        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+    </theme>
+    <theme name="togglebutton" ref="button">
+        <param name="font"><fontDef filename="mc.fnt" color="#772700">
+                <fontParam if="error" color="#6903FF"/>
+                <fontParam if="warning" color="#EEC400"/>
+                <fontParam if="disabled" color="#6C5447"/>
+                <fontParam if="textSelection" color="#290000"/>
+                <fontParam if="selected" color="#4E0007"/>
+            </fontDef>
+            <fontParam if="error" color="#6904FF"/>
+            <fontParam if="error" color="#6904FF"/>
+        </param>
+    </theme>
+    <theme name="checkbox" ref="-defaults">
+        <param name="background"><image>checkbox</image></param>
+        <param name="border"><border>0,32,0,0</border></param>
+    </theme>
+    <theme name="radiobutton" ref="-defaults">
+        <param name="background"><image>radiobutton</image></param>
+        <param name="border"><border>0,32,0,0</border></param>
+    </theme>
+
+
+    <theme name="editfield" ref="-defaults"/>
+</themes>

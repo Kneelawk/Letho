@@ -9,6 +9,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 
 import com.brynwyl.letho.Letho;
 import com.brynwyl.letho.util.ImageInfo;
@@ -27,6 +28,8 @@ public class GLControl {
 			setupDisplay();
 
 			setupGL();
+
+			Letho.initRender();
 		} catch (LWJGLException e) {
 			log.error("LWJGLException: ", e);
 		} catch (IOException e) {
@@ -65,7 +68,20 @@ public class GLControl {
 	}
 
 	public static void setupGL() {
+		GL11.glClearColor(0.3f, 0.3f, 0.3f, 1f);
 
+		// Ortho
+		GL11.glMatrixMode(GL11.GL_PROJECTION);
+		GL11.glLoadIdentity();
+		GL11.glOrtho(0, DISPLAY_WIDTH, DISPLAY_HEIGHT, 0, 1, -1);
+		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+		// Alpha stuf
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		// Texture stuff
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
 	public static void startGLLoop() {
