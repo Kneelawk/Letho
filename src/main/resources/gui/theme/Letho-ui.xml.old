@@ -27,8 +27,14 @@
     
         <area name="radiobuttondot.normal" xywh="84,140,28,28"/>
         <area name="radiobuttondot.disabled" xywh="112,140,28,28"/>
-        <area name="text.pointer.on" xywh="511,0,1,28"/>
-        <area name="text.pointer.off" xywh="510,0,1,28"/>
+        <area name="text.pointer.on" xywh="510,0,2,28" splity="T1,B1" inset="0,-1,0,0"/>
+        <area name="text.pointer.off" xywh="508,0,2,28" inset="0,-2,0,0"/>
+        <area name="text.selection" xywh="509,28,3,3" splitx="L1,R1" splity="T1,B1"/>
+    
+        <area name="editfield.bg.normal" xywh="0,168,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="editfield.bg.disabled" xywh="28,168,28,28" splitx="L6,R6" splity="T6,B6"/>
+    
+    
     
     
     
@@ -39,13 +45,13 @@
                 <alias ref="button.bg.normal.disabled"/>
             </select>
             <select if="selected">
-                <alias ref="button.bg.selected.hover" if="hover"/>
                 <alias ref="button.bg.selected.press" if="pressed | armed"/>
+                <alias ref="button.bg.selected.hover" if="hover"/>
                 <alias ref="button.bg.selected.normal"/>
             </select>
             <select>
-                <alias ref="button.bg.normal.hover" if="hover"/>
                 <alias ref="button.bg.normal.press" if="pressed | armed"/>
+                <alias ref="button.bg.normal.hover" if="hover"/>
                 <alias ref="button.bg.normal.normal"/>
             </select>
         
@@ -62,8 +68,8 @@
         <select name="emptyb.bg">
             <alias ref="emptyb.bg.disabled" if="disabled"/>
             <select>
-                <alias ref="emptyb.bg.normal.hover" if="hover"/>
                 <alias ref="emptyb.bg.normal.press" if="pressed | armed"/>
+                <alias ref="emptyb.bg.normal.hover" if="hover"/>
             
                 <alias ref="emptyb.bg.normal.normal"/>
             </select>
@@ -86,11 +92,13 @@
         
             <alias ref="radiobuttondot.normal"/>
         </select>
-        <composed name="radiobutton">
-            <alias ref="emptyb.bg"/>
-            <alias ref="radiobuttondot" if="selected"/>
-            <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
-        </composed>
+        <grid name="radiobutton" weightsX="0,1" weightsY="1">
+            <composed>
+                <alias ref="emptyb.bg"/>
+                <alias ref="radiobuttondot" if="selected"/>
+                <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
+            </composed>
+        </grid>
         <animation name="text.pointer" timeSource="hover">
             <repeat>
                 <frame duration="500" ref="text.pointer.on"/>
@@ -98,6 +106,11 @@
             
             </repeat>
         </animation>
+        <select name="editfield.bg">
+            <alias ref="editfield.bg.disabled" if="disabled"/>
+            <alias ref="editfield.bg.normal"/>
+        </select>
+    
     
     
     
@@ -127,6 +140,7 @@
         <param name="maxHeight"><int>0</int></param>
         <param name="inputMap"><inputMap>-defaultInputMap</inputMap></param>
     </theme>
+    <theme name="widget" ref="-defaults"/>
 
     <theme name="label" ref="-defaults" allowWildcard="true">
         <param name="border"><border>5</border></param>
@@ -138,7 +152,7 @@
         <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
     </theme>
     <theme name="togglebutton" ref="button">
-        <param name="togglefont"><fontDef filename="mc.fnt" color="#772700">
+        <param name="font"><fontDef filename="mc.fnt" color="#772700">
                 <fontParam if="error" color="#6903FF"/>
                 <fontParam if="warning" color="#EEC400"/>
                 <fontParam if="disabled" color="#6C5447"/>
@@ -151,7 +165,26 @@
     </theme>
     <theme name="checkbox" ref="-defaults">
         <param name="background"><image>checkbox</image></param>
+        <param name="border"><border>0,32,0,0</border></param>
+    </theme>
+    <theme name="radiobutton" ref="-defaults">
+        <param name="background"><image>radiobutton</image></param>
+        <param name="border"><border>0,32,0,0</border></param>
     </theme>
 
-    <theme name="editfield" ref="-defaults"/>
+
+    <theme name="editfield" ref="-defaults">
+        <param name="background"><image>editfield.bg</image></param>
+        <param name="minHeight"><int>32</int></param>
+        <param name="minWidth"><int>200</int></param>
+        <param name="cursor">
+            <image>text.pointer</image>
+        </param>
+        <theme name="renderer" ref="label"/>
+        <param name="border"><border>2</border></param>
+        <param name="selection"><image>text.selection</image></param>
+        <param name="autocompletion-height"><int>150</int></param>
+        <param name="columns"><int>20</int></param>
+        <param name="passwordChar"><int>42</int></param>
+    </theme>
 </themes>
