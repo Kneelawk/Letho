@@ -28,7 +28,7 @@
         <area name="radiobuttondot.normal" xywh="84,140,28,28"/>
         <area name="radiobuttondot.disabled" xywh="112,140,28,28"/>
         <area name="text.pointer.on" xywh="510,0,2,28" splity="T1,B1" inset="0,-1,0,0"/>
-        <area name="text.pointer.off" xywh="508,0,2,28" inset="0,-2,0,0"/>
+        <area name="text.pointer.off" xywh="508,0,2,28" inset="0,-1,0,0"/>
         <area name="text.selection" xywh="509,28,3,3" splitx="L1,R1" splity="T1,B1"/>
     
         <area name="editfield.bg.normal" xywh="0,168,28,28" splitx="L6,R6" splity="T6,B6"/>
