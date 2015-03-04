@@ -16,7 +16,7 @@
         <area name="button.bg.selected.press" xywh="56,28,28,28" splitx="L6,R6" splity="T6,B6"/>
         <area name="button.bg.normal.disabled" xywh="0,56,28,28" splitx="L6,R6" splity="T6,B6"/>
         <area name="button.bg.selected.disabled" xywh="0,84,28,28" splitx="L6,R6" splity="T6,B6"/>
-        <area name="button.fg.keyboardfocus" xywh="84,0,28,28" splitx="L6,R6" splity="T6,B6" unless="disabled"/>
+        <area name="button.fg.keyboardfocus" xywh="84,0,28,28" splitx="L6,R6" splity="T6,B6" if="keyboardFocus"/>
         <area name="emptyb.bg.normal.normal" xywh="0,112,28,28" splitx="L6,R6" splity="T6,B6"/>
         <area name="emptyb.bg.normal.hover" xywh="28,112,28,28" splitx="L6,R6" splity="T6,B6"/>
     
@@ -28,11 +28,55 @@
         <area name="radiobuttondot.normal" xywh="84,140,28,28"/>
         <area name="radiobuttondot.disabled" xywh="112,140,28,28"/>
         <area name="text.pointer.on" xywh="510,0,2,28" splity="T1,B1" inset="0,-1,0,0"/>
-        <area name="text.pointer.off" xywh="508,0,2,28" inset="0,-2,0,0"/>
+        <area name="text.pointer.off" xywh="508,0,2,28" inset="0,-1,0,0"/>
         <area name="text.selection" xywh="509,28,3,3" splitx="L1,R1" splity="T1,B1"/>
     
-        <area name="editfield.bg.normal" xywh="0,168,28,28" splitx="L6,R6" splity="T6,B6"/>
-        <area name="editfield.bg.disabled" xywh="28,168,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="track.bg.normal" xywh="0,168,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="track.bg.disabled" xywh="28,168,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="darktrack.bg.normal" xywh="56,168,28,28" splity="T6,B6" splitx="L6,R6"/>
+        <area name="darktrack.bg.disabled" xywh="84,168,28,28" splitx="L6,R6" splity="T6,B6"/>
+    
+    
+        <area name="smallb.bg.normal.normal" xywh="112,0,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.bg.normal.hover" xywh="140,0,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.bg.normal.pressed" xywh="168,0,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.bg.selected.normal" xywh="112,28,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.bg.selected.hover" xywh="140,28,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.bg.selected.pressed" xywh="168,28,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.bg.normal.disabled" xywh="112,56,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.bg.selected.disabled" xywh="112,84,28,28" splitx="L6,R6" splity="T6,B6"/>
+        <area name="smallb.fg.keyboardfocus" xywh="196,0,28,28" splitx="L6,R6" splity="T6,B6" if="keyboardFocus | hasFocusedChild"/>
+        <area name="arrow.up.normal" xywh="168,112,28,28"/>
+        <area name="arrow.down.normal" xywh="140,112,28,28"/>
+        <area name="arrow.left.normal" xywh="140,140,28,28"/>
+        <area name="arrow.right.normal" xywh="168,140,28,28"/>
+        <area name="arrow.up.disabled" xywh="224,112,28,28"/>
+        <area name="arrow.down.disabled" xywh="196,112,28,28"/>
+        <area name="arrow.left.disabled" xywh="196,140,28,28"/>
+        <area name="arrow.right.disabled" xywh="224,140,28,28"/>
+    
+    
+    
+    
+        <area name="thumbox.normal" xywh="84,28,28,28" splitx="L12,R12" splity="T12,B12"/>
+        <area name="thumbox.disabled" xywh="84,56,28,28" splitx="L12,R12" splity="T12,B12"/>
+        <area name="tooltipwindow" xywh="196,28,28,28" splitx="L6,R6" splity="T6,B6"/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -40,16 +84,14 @@
     
     
         <select name="button.bg">
-            <select if="disabled">
-                <alias ref="button.bg.selected.disabled" if="selected"/>
-                <alias ref="button.bg.normal.disabled"/>
-            </select>
             <select if="selected">
+                <alias ref="button.bg.selected.disabled" if="disabled"/>
                 <alias ref="button.bg.selected.press" if="pressed | armed"/>
                 <alias ref="button.bg.selected.hover" if="hover"/>
                 <alias ref="button.bg.selected.normal"/>
             </select>
             <select>
+                <alias ref="button.bg.normal.disabled" if="disabled"/>
                 <alias ref="button.bg.normal.press" if="pressed | armed"/>
                 <alias ref="button.bg.normal.hover" if="hover"/>
                 <alias ref="button.bg.normal.normal"/>
@@ -58,7 +100,7 @@
         </select>
         <composed name="button">
             <alias ref="button.bg"/>
-            <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
+            <alias ref="button.fg.keyboardfocus" unless="disabled"/>
         
         </composed>
     
@@ -67,12 +109,11 @@
     
         <select name="emptyb.bg">
             <alias ref="emptyb.bg.disabled" if="disabled"/>
-            <select>
-                <alias ref="emptyb.bg.normal.press" if="pressed | armed"/>
-                <alias ref="emptyb.bg.normal.hover" if="hover"/>
-            
-                <alias ref="emptyb.bg.normal.normal"/>
-            </select>
+            <alias ref="emptyb.bg.normal.press" if="pressed | armed"/>
+            <alias ref="emptyb.bg.normal.hover" if="hover"/>
+            <alias ref="emptyb.bg.normal.normal"/>
+        
+        
         </select>
         <select name="checkmark">
             <alias ref="checkmark.disabled" if="disabled"/>
@@ -106,10 +147,82 @@
             
             </repeat>
         </animation>
-        <select name="editfield.bg">
-            <alias ref="editfield.bg.disabled" if="disabled"/>
-            <alias ref="editfield.bg.normal"/>
+        <select name="track.bg">
+            <alias ref="track.bg.disabled" if="disabled"/>
+            <alias ref="track.bg.normal"/>
         </select>
+        <select name="darktrack.bg">
+            <alias ref="darktrack.bg.disabled" if="disabled"/>
+            <alias ref="darktrack.bg.normal"/>
+        
+        </select>
+    
+    
+        <select name="smallb.bg">
+            <select if="selected">
+                <alias ref="smallb.bg.selected.disabled" if="disabled"/>
+                <alias ref="smallb.bg.selected.pressed" if="pressed | armed"/>
+                <alias ref="smallb.bg.selected.hover" if="hover"/>
+                <alias ref="smallb.bg.selected.normal"/>
+            
+            
+            </select>
+        
+            <select>
+                <alias ref="smallb.bg.normal.disabled" if="disabled"/>
+                <alias ref="smallb.bg.normal.pressed" if="pressed | armed"/>
+                <alias ref="smallb.bg.normal.hover" if="hover"/>
+                <alias ref="smallb.bg.normal.normal"/>
+            
+            
+            
+            </select>
+        
+        </select>
+        <alias name="smallb.fg" ref="smallb.fg.keyboardfocus" unless="disabled"/>
+        <select name="selectb.bg">
+            <alias ref="smallb.bg.selected.disabled" if="disabled"/>
+            <alias ref="smallb.bg.selected.pressed" if="pressed | armed"/>
+            <alias ref="smallb.bg.selected.pressed" if="hover"/>
+            <alias ref="smallb.bg.selected.normal"/>
+        </select>
+        <select name="arrow.up">
+            <alias ref="arrow.up.disabled" if="disabled"/>
+            <alias ref="arrow.up.normal"/>
+        
+        </select>
+        <select name="arrow.down">
+            <alias ref="arrow.down.disabled" if="disabled"/>
+            <alias ref="arrow.down.normal"/>
+        </select>
+        <select name="arrow.left">
+            <alias ref="arrow.left.disabled" if="disabled"/>
+            <alias ref="arrow.left.normal"/>
+        
+        </select>
+        <select name="arrow.right">
+            <alias ref="arrow.right.disabled" if="disabled"/>
+            <alias ref="arrow.right.normal"/>
+        
+        </select>
+        <select name="thumbox">
+            <alias ref="thumbox.disabled" if="disabled"/>
+            <alias ref="thumbox.normal"/>
+        
+        </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -143,12 +256,17 @@
     <theme name="widget" ref="-defaults"/>
 
     <theme name="label" ref="-defaults" allowWildcard="true">
-        <param name="border"><border>5</border></param>
+        <param name="border"><border>2,6,5,5</border></param>
     </theme>
     <theme name="button" ref="-defaults">
         <param name="background"><image>button</image></param>
         <param name="border"><border>5</border></param>
         <param name="minWidth"><int>200</int></param>
+        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+    </theme>
+    <theme name="smallbutton" ref="-defaults">
+        <param name="background"><image>smallb.bg</image></param>
+        <param name="border"><border>5</border></param>
         <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
     </theme>
     <theme name="togglebutton" ref="button">
@@ -163,6 +281,19 @@
             <fontParam if="error" color="#6904FF"/>
         </param>
     </theme>
+    <theme name="smalltogglebutton" ref="smallbutton">
+        <param name="font"><fontDef filename="mc.fnt" color="#772700">
+                <fontParam if="error" color="#6903FF"/>
+                <fontParam if="warning" color="#EEC400"/>
+                <fontParam if="disabled" color="#6C5447"/>
+                <fontParam if="textSelection" color="#290000"/>
+                <fontParam if="selected" color="#4E0007"/>
+            </fontDef>
+            <fontParam if="error" color="#6904FF"/>
+            <fontParam if="error" color="#6904FF"/>
+        </param>
+    </theme>
+
     <theme name="checkbox" ref="-defaults">
         <param name="background"><image>checkbox</image></param>
         <param name="border"><border>0,32,0,0</border></param>
@@ -174,7 +305,9 @@
 
 
     <theme name="editfield" ref="-defaults">
-        <param name="background"><image>editfield.bg</image></param>
+        <param name="background"><image>darktrack.bg</image></param>
+        <param name="overlay"><image>smallb.fg</image></param>
+    
         <param name="minHeight"><int>32</int></param>
         <param name="minWidth"><int>200</int></param>
         <param name="cursor">
@@ -186,5 +319,136 @@
         <param name="autocompletion-height"><int>150</int></param>
         <param name="columns"><int>20</int></param>
         <param name="passwordChar"><int>42</int></param>
+        <param name="tooltip"><string>I'm special!</string></param>
     </theme>
+    <theme name="valueadjuster" ref="-defaults">
+        <theme name="valueDisplay" ref="label">
+            <param name="border"><border>7</border></param>
+            <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+            <param name="background"><image>track.bg</image></param>
+            <param name="minWidth"><int>130</int></param>
+        </theme>
+        <theme name="valueEdit" ref="editfield">
+            <param name="minWidth"><int>130</int></param>
+        </theme>
+        <theme name="decButton" ref="smallbutton">
+            <param name="minWidth"><int>35</int></param>
+            <param name="text"><string>-</string></param>
+        </theme>
+        <theme name="incButton" ref="smallbutton">
+            <param name="minWidth"><int>35</int></param>
+            <param name="text"><string>+</string></param>
+        </theme>
+        <param name="width"><int>130</int></param>
+        <param name="displayPrefix"><string/></param>
+        <param name="useMouseWheel"><bool>false</bool></param>
+        <param name="overlay"><image>smallb.fg</image></param>
+    </theme>
+    <theme name="hscrollbar" ref="-defaults">
+        <theme name="leftbutton" ref="smallbutton">
+            <param name="minWidth"><int>28</int></param>
+            <param name="overlay"><image>arrow.left</image></param>
+        </theme>
+        <theme name="rightbutton" ref="smallbutton">
+            <param name="minWidth"><int>28</int></param>
+            <param name="overlay"><image>arrow.right</image></param>
+        </theme>
+        <theme name="thumb" ref="smallbutton">
+            <param name="minWidth"><int>28</int></param>
+            <param name="overlay"><image>thumbox</image></param>
+        </theme>
+        <param name="minHeight"><int>28</int></param>
+        <param name="background"><image>track.bg</image></param>
+        <param name="scaleThumb"><bool>true</bool></param>
+    </theme>
+    <theme name="vscrollbar" ref="-defaults">
+        <theme name="upbutton" ref="smallbutton">
+            <param name="minHeight"><int>28</int></param>
+            <param name="overlay"><image>arrow.up</image></param>
+        </theme>
+        <theme name="downbutton" ref="smallbutton">
+            <param name="minHeight"><int>28</int></param>
+            <param name="overlay"><image>arrow.down</image></param>
+        </theme>
+        <theme name="thumb" ref="smallbutton">
+            <param name="overlay"><image>thumbox</image></param>
+        </theme>
+    
+    
+        <param name="scaleThumb"><bool>true</bool></param>
+        <param name="background"><image>track.bg</image></param>
+        <param name="minWidth"><int>28</int></param>
+        <param name="maxWidth"><int>28</int></param>
+    </theme>
+    <theme name="progressbar" ref="-defaults">
+        <param name="background"><image>track.bg</image></param>
+        <param name="progressImage"><image>text.selection</image></param>
+    
+        <param name="border"><border>4</border></param>
+        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+    </theme>
+    <theme name="listbox" ref="-defaults">
+        <theme name="display" ref="smalltogglebutton">
+            <param name="textAlignment"><enum type="alignment">LEFT</enum></param>
+        </theme>
+        <theme name="vscrollbar" ref="vscrollbar"/>
+        <param name="background"><image>track.bg</image></param>
+        <param name="border"><border>4</border></param>
+    </theme>
+    <theme name="combobox" ref="-defaults">
+        <theme name="button" ref="smallbutton">
+            <param name="overlay"><image>arrow.down</image></param>
+            <param name="minWidth"><int>35</int></param>
+        </theme>
+        <theme name="display" ref="editfield">
+            <param name="border"><border>7</border></param>
+        </theme>
+        <param name="overlay"><image>smallb.fg</image></param>
+    </theme>
+    <theme name="comboboxPopup" ref="-defaults">
+        <theme name="listbox" ref="listbox"/>
+    </theme>
+    <theme name="scrollpane" ref="-defaults">
+        <theme name="hscrollbar" ref="hscrollbar"/>
+        <theme name="vscrollbar" ref="vscrollbar"/>
+        <param name="scrollbarsAlwaysVisible"><bool>true</bool></param>
+        <param name="border"><border>4</border></param>
+        <param name="autoScrollArea"><int>0</int></param>
+    </theme>
+    <theme name="textarea" ref="label">
+        <param name="fonts">
+            <map>
+            </map>
+        </param>
+        <param name="images">
+            <map>
+            </map>
+        </param>
+        <param name="background"><image>darktrack.bg</image></param>
+    
+    </theme>
+    <theme name="tooltipwindow" ref="-defaults">
+        <param name="fadeInTime"><int>5</int></param>
+        <theme name="label" ref="label">
+            <param name="font"><fontDef filename="mc.fnt" color="#5E5E5E">
+                    <fontParam if="error" color="#6903FF"/>
+                    <fontParam if="warning" color="#EEC400"/>
+                    <fontParam if="disabled" color="#6C5447"/>
+                    <fontParam if="textSelection" color="#FFFFFF"/>
+                </fontDef>
+                <fontParam if="error" color="#6904FF"/>
+                <fontParam if="error" color="#6904FF"/>
+            </param>
+        </theme>
+        <param name="background"><image>tooltipwindow</image></param>
+    </theme>
+
+
+
+
+
+
+
+
+
 </themes>
