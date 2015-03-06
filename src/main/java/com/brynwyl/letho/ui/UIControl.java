@@ -31,7 +31,13 @@ public class UIControl {
 		log.info("Init UI Control");
 
 		try {
-			root = new Widget();
+			root = new Widget() {
+				@Override
+				protected void layout() {
+					
+				}
+			};
+			
 			LWJGLRenderer renderer = new LWJGLRenderer();
 
 			buildGui();
@@ -56,6 +62,12 @@ public class UIControl {
 		fps.setPosition(root.getRight() + fps.getWidth(), root.getBottom()
 				+ fps.getHeight() + 10);
 
+		buildMainMenu();
+		root.add(mainMenu);
+	}
+	
+	private static void buildMainMenu() {
+		
 	}
 
 	private static void removeChildren() {
