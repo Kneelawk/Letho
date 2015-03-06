@@ -24,6 +24,8 @@ public class GLControl {
 
 	public static void init() {
 		log = LogManager.getLogger("GLControl");
+		log.info("Init GL Control");
+
 		try {
 			setupDisplay();
 
@@ -86,15 +88,16 @@ public class GLControl {
 
 	public static void startGLLoop() {
 		while (!Display.isCloseRequested()) {
-			Display.update();
-
 			glLoop();
+			
+			Display.update();
 		}
 
 		shutdown();
 	}
 
 	public static void glLoop() {
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		Letho.glLoop();
 	}
 

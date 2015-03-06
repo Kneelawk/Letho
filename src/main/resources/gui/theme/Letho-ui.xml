@@ -125,6 +125,7 @@
                 <alias ref="checkmark" if="selected"/>
                 <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
             </composed>
+            <alias ref="none"/>
         </grid>
     
     
@@ -139,6 +140,7 @@
                 <alias ref="radiobuttondot" if="selected"/>
                 <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
             </composed>
+            <alias ref="none"/>
         </grid>
         <animation name="text.pointer" timeSource="hover">
             <repeat>
@@ -277,8 +279,6 @@
                 <fontParam if="textSelection" color="#290000"/>
                 <fontParam if="selected" color="#4E0007"/>
             </fontDef>
-            <fontParam if="error" color="#6904FF"/>
-            <fontParam if="error" color="#6904FF"/>
         </param>
     </theme>
     <theme name="smalltogglebutton" ref="smallbutton">
@@ -289,8 +289,6 @@
                 <fontParam if="textSelection" color="#290000"/>
                 <fontParam if="selected" color="#4E0007"/>
             </fontDef>
-            <fontParam if="error" color="#6904FF"/>
-            <fontParam if="error" color="#6904FF"/>
         </param>
     </theme>
 
@@ -435,12 +433,14 @@
                     <fontParam if="disabled" color="#6C5447"/>
                     <fontParam if="textSelection" color="#FFFFFF"/>
                 </fontDef>
-                <fontParam if="error" color="#6904FF"/>
-                <fontParam if="error" color="#6904FF"/>
             </param>
         </theme>
         <param name="background"><image>tooltipwindow</image></param>
     </theme>
+    <theme name="fpscounter" ref="label">
+        <param name="tooltip"><string>Current Frames Per Second</string></param>
+    </theme>
+
 
 
 

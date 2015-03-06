@@ -120,6 +120,7 @@
             <alias ref="checkmark.normal"/>
         </select>
         <grid name="checkbox" weightsX="0,1" weightsY="1">
+            <alias ref=""/>
             <composed>
                 <alias ref="emptyb.bg"/>
                 <alias ref="checkmark" if="selected"/>
@@ -319,7 +320,6 @@
         <param name="autocompletion-height"><int>150</int></param>
         <param name="columns"><int>20</int></param>
         <param name="passwordChar"><int>42</int></param>
-        <param name="tooltip"><string>I'm special!</string></param>
     </theme>
     <theme name="valueadjuster" ref="-defaults">
         <theme name="valueDisplay" ref="label">
@@ -442,6 +442,10 @@
         </theme>
         <param name="background"><image>tooltipwindow</image></param>
     </theme>
+    <theme name="fpscounter" ref="label">
+        <param name="tooltip"><string>Current Frames Per Second</string></param>
+    </theme>
+
 
 
 

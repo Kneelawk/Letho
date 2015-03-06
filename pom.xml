@@ -20,7 +20,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.pommert.jedidiah.fractalviewer2.FractalViewer2</mainClass>
+							<mainClass>com.brynwyl.letho.Letho</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
