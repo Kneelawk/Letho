@@ -34,10 +34,10 @@ public class UIControl {
 			root = new Widget() {
 				@Override
 				protected void layout() {
-					
+
 				}
 			};
-			
+
 			LWJGLRenderer renderer = new LWJGLRenderer();
 
 			buildGui();
@@ -65,9 +65,10 @@ public class UIControl {
 		buildMainMenu();
 		root.add(mainMenu);
 	}
-	
+
 	private static void buildMainMenu() {
-		
+		mainMenu = new BoxLayout();
+		mainMenu.setTheme("/widget");
 	}
 
 	private static void removeChildren() {

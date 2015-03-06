@@ -16,6 +16,7 @@ public class Letho {
 
 		// add natives to classpath
 		CPControl.init();
+		CPControl.addNativesDir();
 
 		// load opengl
 		GLControl.init();
