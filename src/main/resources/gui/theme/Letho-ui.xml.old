@@ -7,6 +7,9 @@
         <fontParam if="disabled" color="#6C5448"/>
         <fontParam if="textSelection" color="#290000"/>
     </fontDef>
+    <fontDef name="title" filename="title.fnt" color="#000000"/>
+
+
     <images file="gui.png">
         <area name="button.bg.normal.normal" xywh="0,0,28,28" splitx="L6,R6" splity="T6,B6"/>
         <area name="button.bg.normal.hover" xywh="28,0,28,28" splitx="L6,R6" splity="T6,B6"/>
@@ -120,12 +123,12 @@
             <alias ref="checkmark.normal"/>
         </select>
         <grid name="checkbox" weightsX="0,1" weightsY="1">
-            <alias ref=""/>
             <composed>
                 <alias ref="emptyb.bg"/>
                 <alias ref="checkmark" if="selected"/>
                 <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
             </composed>
+            <alias ref="none"/>
         </grid>
     
     
@@ -140,6 +143,7 @@
                 <alias ref="radiobuttondot" if="selected"/>
                 <alias ref="button.fg.keyboardfocus" if="keyboardFocus"/>
             </composed>
+            <alias ref="none"/>
         </grid>
         <animation name="text.pointer" timeSource="hover">
             <repeat>
@@ -232,6 +236,8 @@
     </images>
 
 
+
+
     <inputMapDef name="-defaultInputMap">
         <action name="selectAll">ctrl A</action>
         <action name="selectAll">cmd A</action>
@@ -259,6 +265,10 @@
     <theme name="label" ref="-defaults" allowWildcard="true">
         <param name="border"><border>2,6,5,5</border></param>
     </theme>
+    <theme name="title-label" ref="label">
+        <param name="font"><font>title</font></param>
+    </theme>
+
     <theme name="button" ref="-defaults">
         <param name="background"><image>button</image></param>
         <param name="border"><border>5</border></param>
@@ -278,8 +288,6 @@
                 <fontParam if="textSelection" color="#290000"/>
                 <fontParam if="selected" color="#4E0007"/>
             </fontDef>
-            <fontParam if="error" color="#6904FF"/>
-            <fontParam if="error" color="#6904FF"/>
         </param>
     </theme>
     <theme name="smalltogglebutton" ref="smallbutton">
@@ -290,8 +298,6 @@
                 <fontParam if="textSelection" color="#290000"/>
                 <fontParam if="selected" color="#4E0007"/>
             </fontDef>
-            <fontParam if="error" color="#6904FF"/>
-            <fontParam if="error" color="#6904FF"/>
         </param>
     </theme>
 
@@ -436,8 +442,6 @@
                     <fontParam if="disabled" color="#6C5447"/>
                     <fontParam if="textSelection" color="#FFFFFF"/>
                 </fontDef>
-                <fontParam if="error" color="#6904FF"/>
-                <fontParam if="error" color="#6904FF"/>
             </param>
         </theme>
         <param name="background"><image>tooltipwindow</image></param>

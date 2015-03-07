@@ -98,6 +98,7 @@ public class GLControl {
 
 	public static void glLoop() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		GL11.glLoadIdentity();
 		Letho.glLoop();
 	}
 
