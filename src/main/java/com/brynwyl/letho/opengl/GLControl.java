@@ -21,6 +21,8 @@ public class GLControl {
 
 	public static Logger log;
 	public static ByteBuffer[] icons = null;
+	public static long currTime = System.currentTimeMillis();
+	public static long oldTime = currTime;
 
 	public static void init() {
 		log = LogManager.getLogger("GLControl");
@@ -89,7 +91,7 @@ public class GLControl {
 	public static void startGLLoop() {
 		while (!Display.isCloseRequested()) {
 			glLoop();
-			
+
 			Display.update();
 		}
 
@@ -99,7 +101,15 @@ public class GLControl {
 	public static void glLoop() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		GL11.glLoadIdentity();
-		Letho.glLoop();
+		short delta = getDelta();
+		Letho.glLoop(delta);
+	}
+
+	private static short getDelta() {
+		currTime = System.currentTimeMillis();
+		short delta = (short) (currTime - oldTime);
+		oldTime = currTime;
+		return delta;
 	}
 
 	public static void shutdown() {

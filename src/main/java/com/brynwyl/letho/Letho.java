@@ -29,8 +29,8 @@ public class Letho {
 		UIControl.init();
 	}
 
-	public static void glLoop() {
-		UIControl.glLoop();
+	public static void glLoop(short delta) {
+		UIControl.glLoop(delta);
 	}
 
 	public static void shutdown() {

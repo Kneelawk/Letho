@@ -123,7 +123,7 @@ public class UIControl {
 		}
 	}
 
-	public static void glLoop() {
+	public static void glLoop(short delta) {
 		if (currentGui != GUI_ID_GAME) {
 			GL11.glColor4f(1f, 1f, 1f, 1f);
 			menubg.bind();
@@ -139,7 +139,7 @@ public class UIControl {
 			GL11.glTexCoord2f(0f, 1f);
 			GL11.glVertex2f(bgPos, GLControl.DISPLAY_HEIGHT);
 			GL11.glEnd();
-			bgPos -= 0.5;
+			bgPos -= 0.05f * delta;
 			if (bgPos <= -(GLControl.DISPLAY_HEIGHT * menubg.width / menubg.height))
 				bgPos = 0f;
 		}
