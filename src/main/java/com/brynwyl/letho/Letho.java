@@ -11,8 +11,8 @@ public class Letho {
 	public static Logger log;
 
 	public static void main(String[] args) {
-		log = LogManager.getLogger("Lethos");
-		log.info("Init Lethos");
+		log = LogManager.getLogger("Letho");
+		log.info("Init Letho");
 
 		// add natives to classpath
 		CPControl.init();
