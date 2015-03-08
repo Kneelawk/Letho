@@ -41,7 +41,7 @@ public class UIControl {
 
 	public static Logger log;
 	public static boolean isGuiOpen = true;
-	public static int oldGui = -1;
+	public static int oldGui = 1;
 	public static int currentGui = 1;
 	public static float bgPos = 0f;
 
@@ -71,6 +71,8 @@ public class UIControl {
 			buildGui();
 
 			gui = new GUI(root, renderer);
+
+			mainMenu.requestKeyboardFocus();
 
 			theme = ThemeManager.createThemeManager(
 					UIControl.class.getResource("/gui/theme/Letho-ui.xml"),
@@ -118,10 +120,11 @@ public class UIControl {
 		selectWorld.addCallback(new Runnable() {
 			@Override
 			public void run() {
+				// TODO refresh worlds
 				currentGui = GUI_ID_WORLD_SELECTION;
 			}
 		});
-		
+
 		Button settings = new Button("Settings...");
 		settings.setTheme(THEME_BUTTON);
 		mainMenu.add(settings);
@@ -135,7 +138,6 @@ public class UIControl {
 				GLControl.requestStop();
 			}
 		});
-
 		centerWidget(root, mainMenu);
 	}
 
@@ -162,6 +164,50 @@ public class UIControl {
 			@Override
 			public void run() {
 				currentGui = GUI_ID_MAIN_MENU;
+			}
+		});
+
+		Button playWorld = new Button("Play World...");
+		playWorld.setTheme(THEME_BUTTON);
+		buttonBox.add(playWorld);
+
+		Button importWorld = new Button("Import World...");
+		importWorld.setTheme(THEME_BUTTON);
+		buttonBox.add(importWorld);
+		importWorld.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				// TODO copy world into worlds dir
+				// TODO refresh worlds
+			}
+		});
+
+		buttonBox = new BoxLayout(Direction.HORIZONTAL);
+		buttonBox.setTheme(THEME_PANEL);
+		worldSelect.add(buttonBox);
+
+		Button exportWorld = new Button("Export World...");
+		exportWorld.setTheme(THEME_BUTTON);
+		buttonBox.add(exportWorld);
+
+		Button refreshWorlds = new Button("Refresh World List");
+		refreshWorlds.setTheme(THEME_BUTTON);
+		buttonBox.add(refreshWorlds);
+		refreshWorlds.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				// TODO refresh worlds
+			}
+		});
+
+		Button removeWorld = new Button("Remove World...");
+		removeWorld.setTheme(THEME_BUTTON);
+		buttonBox.add(removeWorld);
+		removeWorld.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				// TODO show deletion confirmation dialog
+				// TODO refresh worlds
 			}
 		});
 	}
@@ -210,10 +256,12 @@ public class UIControl {
 			case GUI_ID_MAIN_MENU:
 				removeChildren();
 				root.add(mainMenu);
+				mainMenu.requestKeyboardFocus();
 				break;
 			case GUI_ID_WORLD_SELECTION:
 				removeChildren();
 				root.add(worldSelect);
+				worldSelect.requestKeyboardFocus();
 				break;
 			}
 
