@@ -18,6 +18,8 @@ public class GLControl {
 	public static final int DISPLAY_WIDTH = 1000;
 	public static final int DISPLAY_HEIGHT = 600;
 	public static final String DISPLAY_NAME = "Letho";
+	
+	private static boolean running = true;
 
 	public static Logger log;
 	public static ByteBuffer[] icons = null;
@@ -41,7 +43,7 @@ public class GLControl {
 		}
 	}
 
-	public static void setupDisplay() throws LWJGLException, IOException {
+	private static void setupDisplay() throws LWJGLException, IOException {
 		Display.setDisplayMode(new DisplayMode(DISPLAY_WIDTH, DISPLAY_HEIGHT));
 		Display.setTitle(DISPLAY_NAME);
 		setupIcons();
@@ -49,7 +51,7 @@ public class GLControl {
 		Display.create();
 	}
 
-	public static void setupIcons() throws IOException {
+	private static void setupIcons() throws IOException {
 		if (icons != null)
 			return;
 		switch (LWJGLUtil.getPlatform()) {
@@ -71,7 +73,7 @@ public class GLControl {
 		}
 	}
 
-	public static void setupGL() {
+	private static void setupGL() {
 		GL11.glClearColor(0.3f, 0.3f, 0.3f, 1f);
 
 		// Ortho
@@ -89,7 +91,7 @@ public class GLControl {
 	}
 
 	public static void startGLLoop() {
-		while (!Display.isCloseRequested()) {
+		while (!Display.isCloseRequested() && running) {
 			glLoop();
 
 			Display.update();
@@ -98,7 +100,7 @@ public class GLControl {
 		shutdown();
 	}
 
-	public static void glLoop() {
+	private static void glLoop() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		GL11.glLoadIdentity();
 		short delta = getDelta();
@@ -111,8 +113,12 @@ public class GLControl {
 		oldTime = currTime;
 		return delta;
 	}
+	
+	public static void requestStop() {
+		running = false;
+	}
 
-	public static void shutdown() {
+	private static void shutdown() {
 		Letho.shutdown();
 		Display.destroy();
 	}

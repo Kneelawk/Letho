@@ -11,9 +11,11 @@ import com.brynwyl.letho.util.ImageInfo;
 
 import de.matthiasmann.twl.BoxLayout;
 import de.matthiasmann.twl.BoxLayout.Direction;
+import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.FPSCounter;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.ListBox;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
@@ -29,9 +31,13 @@ public class UIControl {
 	public static final String THEME_PANEL = "/widget";
 	public static final String THEME_TITLE = "/title-label";
 	public static final String THEME_FPS_COUNTER = "/fpscounter";
+	public static final String THEME_BUTTON = "/button";
+	public static final String THEME_LABEL = "/label";
+	public static final String THEME_WORLD_LIST_BOX = "/world-listbox";
 
 	/* ***MISC.*** */
 	public static final String TITLE = "Letho";
+	public static final String SELECT_WORLD_TITLE = "Select a world:";
 
 	public static Logger log;
 	public static boolean isGuiOpen = true;
@@ -42,8 +48,9 @@ public class UIControl {
 	public static Widget root;
 	public static GUI gui;
 	public static ThemeManager theme;
-	public static BoxLayout mainMenu;
 	public static ImageInfo menubg;
+	public static BoxLayout mainMenu;
+	public static BoxLayout worldSelect;
 
 	public static void init() {
 		log = LogManager.getLogger("UIControl");
@@ -75,6 +82,11 @@ public class UIControl {
 	}
 
 	private static void buildGui() throws IOException {
+		// background
+		menubg = ImageInfo
+				.loadTextureResource("/textures/backgrounds/castle_background.png");
+		menubg.registerGlTex();
+
 		// root size
 		root.setSize(GLControl.DISPLAY_WIDTH, GLControl.DISPLAY_HEIGHT);
 
@@ -87,15 +99,10 @@ public class UIControl {
 				root.getY() + fps.getHeight() + 10);
 
 		buildMainMenu();
+		buildWorldSelect();
 	}
 
 	private static void buildMainMenu() throws IOException {
-		// background
-		menubg = ImageInfo
-				.loadTextureResource("/textures/backgrounds/castle_background.png");
-		menubg.registerGlTex();
-
-		// gui
 		mainMenu = new BoxLayout(Direction.VERTICAL);
 		mainMenu.setTheme(THEME_PANEL);
 
@@ -105,7 +112,58 @@ public class UIControl {
 		title.setTheme(THEME_TITLE);
 		mainMenu.add(title);
 
+		Button selectWorld = new Button("Select World...");
+		selectWorld.setTheme(THEME_BUTTON);
+		mainMenu.add(selectWorld);
+		selectWorld.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				currentGui = GUI_ID_WORLD_SELECTION;
+			}
+		});
+		
+		Button settings = new Button("Settings...");
+		settings.setTheme(THEME_BUTTON);
+		mainMenu.add(settings);
+
+		Button quit = new Button("Quit");
+		quit.setTheme(THEME_BUTTON);
+		mainMenu.add(quit);
+		quit.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				GLControl.requestStop();
+			}
+		});
+
 		centerWidget(root, mainMenu);
+	}
+
+	private static void buildWorldSelect() {
+		worldSelect = new BoxLayout(Direction.VERTICAL);
+		worldSelect.setTheme(THEME_PANEL);
+
+		Label title = new Label(SELECT_WORLD_TITLE);
+		title.setTheme(THEME_LABEL);
+		worldSelect.add(title);
+
+		ListBox<String> worldList = new ListBox<String>();
+		worldList.setTheme(THEME_WORLD_LIST_BOX);
+		worldSelect.add(worldList);
+
+		BoxLayout buttonBox = new BoxLayout(Direction.HORIZONTAL);
+		buttonBox.setTheme(THEME_PANEL);
+		worldSelect.add(buttonBox);
+
+		Button cancel = new Button("Cancel");
+		cancel.setTheme(THEME_BUTTON);
+		buttonBox.add(cancel);
+		cancel.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				currentGui = GUI_ID_MAIN_MENU;
+			}
+		});
 	}
 
 	private static void centerWidget(Widget parent, Widget child) {
@@ -152,6 +210,10 @@ public class UIControl {
 			case GUI_ID_MAIN_MENU:
 				removeChildren();
 				root.add(mainMenu);
+				break;
+			case GUI_ID_WORLD_SELECTION:
+				removeChildren();
+				root.add(worldSelect);
 				break;
 			}
 
