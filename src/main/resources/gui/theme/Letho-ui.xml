@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
-    <fontDef name="normal" filename="mc.fnt" color="#772700">
+    <fontDef name="normal" filename="mc.fnt" color="#003C01">
         <fontParam if="error" color="#6904FF"/>
         <fontParam if="warning" color="#EEC400"/>
-        <fontParam if="disabled" color="#6C5448"/>
-        <fontParam if="textSelection" color="#290000"/>
+        <fontParam if="disabled" color="#253726"/>
+        <fontParam if="textSelection" color="#051400"/>
     </fontDef>
     <fontDef name="title" filename="title.fnt" color="#000000"/>
 
@@ -285,22 +285,22 @@
         <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
     </theme>
     <theme name="togglebutton" ref="button">
-        <param name="font"><fontDef filename="mc.fnt" color="#772700">
+        <param name="font"><fontDef filename="mc.fnt" color="#003C01">
                 <fontParam if="error" color="#6903FF"/>
                 <fontParam if="warning" color="#EEC400"/>
-                <fontParam if="disabled" color="#6C5447"/>
-                <fontParam if="textSelection" color="#290000"/>
-                <fontParam if="selected" color="#4E0007"/>
+                <fontParam if="disabled" color="#253726"/>
+                <fontParam if="textSelection" color="#051400"/>
+                <fontParam if="selected" color="#0F2800"/>
             </fontDef>
         </param>
     </theme>
     <theme name="smalltogglebutton" ref="smallbutton">
-        <param name="font"><fontDef filename="mc.fnt" color="#772700">
+        <param name="font"><fontDef filename="mc.fnt" color="#003C01">
                 <fontParam if="error" color="#6903FF"/>
                 <fontParam if="warning" color="#EEC400"/>
-                <fontParam if="disabled" color="#6C5447"/>
-                <fontParam if="textSelection" color="#290000"/>
-                <fontParam if="selected" color="#4E0007"/>
+                <fontParam if="disabled" color="#253726"/>
+                <fontParam if="textSelection" color="#051400"/>
+                <fontParam if="selected" color="#0F2800"/>
             </fontDef>
         </param>
     </theme>
@@ -469,7 +469,7 @@
             <param name="font"><fontDef filename="mc.fnt" color="#5E5E5E">
                     <fontParam if="error" color="#6903FF"/>
                     <fontParam if="warning" color="#EEC400"/>
-                    <fontParam if="disabled" color="#6C5447"/>
+                    <fontParam if="disabled" color="#253726"/>
                     <fontParam if="textSelection" color="#FFFFFF"/>
                 </fontDef>
             </param>

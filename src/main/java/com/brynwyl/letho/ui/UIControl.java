@@ -26,6 +26,7 @@ public class UIControl {
 	public static final int GUI_ID_MAIN_MENU = 1;
 	public static final int GUI_ID_WORLD_SELECTION = 2;
 	public static final int GUI_ID_PROGRESS_SELECTION = 3;
+	public static final int GUI_ID_SETTINGS = 4;
 
 	/* ***THEMES*** */
 	public static final String THEME_PANEL = "/widget";
@@ -35,9 +36,21 @@ public class UIControl {
 	public static final String THEME_LABEL = "/label";
 	public static final String THEME_WORLD_LIST_BOX = "/world-listbox";
 
-	/* ***MISC.*** */
+	/* ***TITLES*** */
 	public static final String TITLE = "Letho";
-	public static final String SELECT_WORLD_TITLE = "Select a world:";
+	public static final String LOAD_WORLD_TITLE = "Load a world:";
+	public static final String SETTINGS_TITLE = "Settings";
+
+	/* ***UI OBJECTS*** */
+	public static final String LOAD_WORLD_MENU_BUTTON = "Load world...";
+	public static final String SETTINGS_MENU_BUTTON = "Settings...";
+	public static final String QUIT_MENU_BUTTON = "Quit";
+	public static final String CANCEL_BUTTON = "Cancel";
+	public static final String PLAY_WORLD_BUTTON = "Play world...";
+	public static final String IMPORT_WORLD_BUTTON = "Import world...";
+	public static final String EXPORT_WORLD_BUTTON = "Export world...";
+	public static final String REFRESH_WORLDS_BUTTON = "Refresh world list";
+	public static final String REMOVE_WORLD_BUTTON = "Remove world...";
 
 	public static Logger log;
 	public static boolean isGuiOpen = true;
@@ -49,8 +62,10 @@ public class UIControl {
 	public static GUI gui;
 	public static ThemeManager theme;
 	public static ImageInfo menubg;
+	public static FPSCounter fpsCounter;
 	public static BoxLayout mainMenu;
 	public static BoxLayout worldSelect;
+	public static BoxLayout settings;
 
 	public static void init() {
 		log = LogManager.getLogger("UIControl");
@@ -93,15 +108,16 @@ public class UIControl {
 		root.setSize(GLControl.DISPLAY_WIDTH, GLControl.DISPLAY_HEIGHT);
 
 		// FPS Counter
-		FPSCounter fps = new FPSCounter();
-		fps.setText("030.00");
-		fps.setTheme(THEME_FPS_COUNTER);
-		root.add(fps);
-		fps.setPosition(root.getX() + fps.getWidth(),
-				root.getY() + fps.getHeight() + 10);
+		fpsCounter = new FPSCounter();
+		fpsCounter.setText("030.00");
+		fpsCounter.setTheme(THEME_FPS_COUNTER);
+		root.add(fpsCounter);
+		fpsCounter.setPosition(root.getX() + fpsCounter.getWidth(), root.getY()
+				+ fpsCounter.getHeight() + 10);
 
 		buildMainMenu();
 		buildWorldSelect();
+		buildSettings();
 	}
 
 	private static void buildMainMenu() throws IOException {
@@ -114,7 +130,7 @@ public class UIControl {
 		title.setTheme(THEME_TITLE);
 		mainMenu.add(title);
 
-		Button selectWorld = new Button("Select World...");
+		Button selectWorld = new Button(LOAD_WORLD_MENU_BUTTON);
 		selectWorld.setTheme(THEME_BUTTON);
 		mainMenu.add(selectWorld);
 		selectWorld.addCallback(new Runnable() {
@@ -125,11 +141,17 @@ public class UIControl {
 			}
 		});
 
-		Button settings = new Button("Settings...");
+		Button settings = new Button(SETTINGS_MENU_BUTTON);
 		settings.setTheme(THEME_BUTTON);
 		mainMenu.add(settings);
+		settings.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				currentGui = GUI_ID_SETTINGS;
+			}
+		});
 
-		Button quit = new Button("Quit");
+		Button quit = new Button(QUIT_MENU_BUTTON);
 		quit.setTheme(THEME_BUTTON);
 		mainMenu.add(quit);
 		quit.addCallback(new Runnable() {
@@ -145,7 +167,7 @@ public class UIControl {
 		worldSelect = new BoxLayout(Direction.VERTICAL);
 		worldSelect.setTheme(THEME_PANEL);
 
-		Label title = new Label(SELECT_WORLD_TITLE);
+		Label title = new Label(LOAD_WORLD_TITLE);
 		title.setTheme(THEME_LABEL);
 		worldSelect.add(title);
 
@@ -157,7 +179,7 @@ public class UIControl {
 		buttonBox.setTheme(THEME_PANEL);
 		worldSelect.add(buttonBox);
 
-		Button cancel = new Button("Cancel");
+		Button cancel = new Button(CANCEL_BUTTON);
 		cancel.setTheme(THEME_BUTTON);
 		buttonBox.add(cancel);
 		cancel.addCallback(new Runnable() {
@@ -167,11 +189,11 @@ public class UIControl {
 			}
 		});
 
-		Button playWorld = new Button("Play World...");
+		Button playWorld = new Button(PLAY_WORLD_BUTTON);
 		playWorld.setTheme(THEME_BUTTON);
 		buttonBox.add(playWorld);
 
-		Button importWorld = new Button("Import World...");
+		Button importWorld = new Button(IMPORT_WORLD_BUTTON);
 		importWorld.setTheme(THEME_BUTTON);
 		buttonBox.add(importWorld);
 		importWorld.addCallback(new Runnable() {
@@ -186,11 +208,11 @@ public class UIControl {
 		buttonBox.setTheme(THEME_PANEL);
 		worldSelect.add(buttonBox);
 
-		Button exportWorld = new Button("Export World...");
+		Button exportWorld = new Button(EXPORT_WORLD_BUTTON);
 		exportWorld.setTheme(THEME_BUTTON);
 		buttonBox.add(exportWorld);
 
-		Button refreshWorlds = new Button("Refresh World List");
+		Button refreshWorlds = new Button(REFRESH_WORLDS_BUTTON);
 		refreshWorlds.setTheme(THEME_BUTTON);
 		buttonBox.add(refreshWorlds);
 		refreshWorlds.addCallback(new Runnable() {
@@ -200,7 +222,7 @@ public class UIControl {
 			}
 		});
 
-		Button removeWorld = new Button("Remove World...");
+		Button removeWorld = new Button(REMOVE_WORLD_BUTTON);
 		removeWorld.setTheme(THEME_BUTTON);
 		buttonBox.add(removeWorld);
 		removeWorld.addCallback(new Runnable() {
@@ -208,6 +230,25 @@ public class UIControl {
 			public void run() {
 				// TODO show deletion confirmation dialog
 				// TODO refresh worlds
+			}
+		});
+	}
+
+	private static void buildSettings() {
+		settings = new BoxLayout(Direction.VERTICAL);
+		settings.setTheme(THEME_PANEL);
+
+		Label settingsTitle = new Label(SETTINGS_TITLE);
+		settingsTitle.setTheme(THEME_LABEL);
+		settings.add(settingsTitle);
+
+		Button cancel = new Button(CANCEL_BUTTON);
+		cancel.setTheme(THEME_BUTTON);
+		settings.add(cancel);
+		cancel.addCallback(new Runnable() {
+			@Override
+			public void run() {
+				currentGui = GUI_ID_MAIN_MENU;
 			}
 		});
 	}
@@ -222,9 +263,8 @@ public class UIControl {
 	}
 
 	private static void removeChildren() {
-		while (root.getNumChildren() > 1) {
-			root.removeChild(1);
-		}
+		root.removeAllChildren();
+		root.add(fpsCounter);
 	}
 
 	public static void glLoop(short delta) {
@@ -263,6 +303,10 @@ public class UIControl {
 				root.add(worldSelect);
 				worldSelect.requestKeyboardFocus();
 				break;
+			case GUI_ID_SETTINGS:
+				removeChildren();
+				root.add(settings);
+				settings.requestKeyboardFocus();
 			}
 
 			oldGui = currentGui;

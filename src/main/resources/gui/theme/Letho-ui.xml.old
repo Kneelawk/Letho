@@ -427,6 +427,8 @@
         <param name="cellWidth"><int>574</int></param>
     
         <param name="minWidth"><int>610</int></param>
+        <param name="minHeight"><int>400</int></param>
+    
     </theme>
 
     <theme name="combobox" ref="-defaults">

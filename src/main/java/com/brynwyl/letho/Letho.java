@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.brynwyl.letho.classpath.CPControl;
+import com.brynwyl.letho.io.WorldControl;
 import com.brynwyl.letho.opengl.GLControl;
 import com.brynwyl.letho.ui.UIControl;
 
@@ -17,6 +18,9 @@ public class Letho {
 		// add natives to classpath
 		CPControl.init();
 		CPControl.addNativesDir();
+
+		// load world data
+		WorldControl.init();
 
 		// load opengl
 		GLControl.init();
