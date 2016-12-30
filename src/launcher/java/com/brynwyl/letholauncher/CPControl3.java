@@ -163,7 +163,7 @@ public class CPControl3 {
 		public boolean accept(String path) throws IOException {
 			String lower = path.toLowerCase();
 			return lower.endsWith(".so") || lower.endsWith(".dll") || lower.endsWith(".jnilib")
-					|| lower.endsWith(".dynlib");
+					|| lower.endsWith(".dylib");
 		}
 	};
 
