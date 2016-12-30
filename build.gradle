@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+version = '0.0.1-SNAPSHOT'
+
+ext.launcherMain = 'org.kneelawk.hellojmonkeylauncher.HelloJMonkeyLauncher'
+
+sourceSets { launcher }
+
+repositories {
+	jcenter()
+	maven {
+		url './project-repo'
+	}
+}
+
+dependencies {
+	compile 'org.lwjgl.lwjgl:lwjgl:2.9.3'
+	compile 'org.lwjgl.lwjgl:lwjgl_util:2.9.3'
+	compile 'org.jcraft:jorbis:0.0.17'
+	compile 'ibxm:ibxm:a68'
+	compile 'org.apache.logging.log4j:log4j-core:2.1'
+	compile 'org.newdawn:slick:237'
+	compile 'de.mattiasmann:twl:1108'
+	compile 'commons-configuration:commons-configuration:1.10'
+	compile 'com.kneelawk.stree:core:1.1.0'
+	compile 'rhino:js:1.7R2'
+}
+
+// builds the launch jar
+task launcherJar(type: Jar, dependsOn: [jar, launcherClasses]) {
+	manifest { attributes 'Main-Class': launcherMain }
+	baseName "${project.name}-all"
+	from(configurations.compile) { into 'libs' }
+	from('dependencies/natives') { into 'natives' }
+	from(jar.outputs.files) { into 'app' }
+	from(sourceSets.launcher.output)
+	from('LICENSE')
+
+	group 'Build'
+	description 'Creates a jar with all dependencies included.'
+}
+
+assemble.dependsOn launcherJar
