@@ -24,7 +24,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * CPControl v3.1.1<br>
+ * CPControl v3.1.2<br>
  * Sorry about the mess. This should be an entire library or at least a package,
  * but is stuffed into one class for ease of copy-and-paste.
  */
@@ -140,7 +140,7 @@ public class CPControl3 {
 		public boolean accept(File file) {
 			String name = file.getName().toLowerCase();
 			return name.endsWith(".so") || name.endsWith(".dll") || name.endsWith(".jnilib")
-					|| name.endsWith(".dynlib");
+					|| name.endsWith(".dylib");
 		}
 	};
 
