@@ -3,7 +3,6 @@ package com.brynwyl.letho;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.brynwyl.letho.classpath.CPControl;
 import com.brynwyl.letho.io.WorldControl;
 import com.brynwyl.letho.opengl.GLControl;
 import com.brynwyl.letho.ui.UIControl;
@@ -14,10 +13,6 @@ public class Letho {
 	public static void main(String[] args) {
 		log = LogManager.getLogger("Letho");
 		log.info("Init Letho");
-
-		// add natives to classpath
-		CPControl.init();
-		CPControl.addNativesDir();
 
 		// load world data
 		WorldControl.init();
