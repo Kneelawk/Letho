@@ -4,7 +4,7 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.8
 version = '0.0.1-SNAPSHOT'
 
-ext.launcherMain = 'org.kneelawk.hellojmonkeylauncher.HelloJMonkeyLauncher'
+ext.launcherMain = 'com.brynwyl.letholauncher.LethoLauncher'
 
 sourceSets { launcher }
 
