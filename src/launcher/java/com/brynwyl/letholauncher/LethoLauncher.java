@@ -2,6 +2,8 @@ package com.brynwyl.letholauncher;
 
 import java.io.IOException;
 
+import org.kneelawk.cpcontrol.CPControl3;
+
 public class LethoLauncher {
 	public static void main(String[] args) {
 		CPControl3 cp = new CPControl3("com.brynwyl.letho.Letho");

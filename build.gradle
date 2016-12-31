@@ -6,13 +6,18 @@ version = '0.0.1-SNAPSHOT'
 
 ext.launcherMain = 'com.brynwyl.letholauncher.LethoLauncher'
 
-sourceSets { launcher }
+sourceSets {
+	launcher {
+		java {
+			srcDir 'src/launcher/java'
+			srcDir 'CPControl/src/main/java'
+		}
+	}
+}
 
 repositories {
 	jcenter()
-	maven {
-		url './project-repo'
-	}
+	maven { url './project-repo' }
 }
 
 dependencies {
